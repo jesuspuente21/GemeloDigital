@@ -1,0 +1,40 @@
+<div class="container" [class.is-mobile]="mobileQuery.matches">
+    <mat-toolbar color="primary" id="toolbar">
+      <mat-toolbar-row>
+        <span>
+          <button mat-button>
+            <img src="assets/logo.PNG" (click)= "snav.toggle()" />
+          </button>
+        </span>
+  
+        <span>
+          <button mat-button>Gemelo digital de embarcaciones</button>
+        </span>
+        <!-- This fills the remaining space of the current row -->
+        <span class="flex-filler"></span>
+  
+        <!-- External links -->
+        <div *ngIf="!mobileQuery.matches">
+          <span>
+            <a mat-button href="https://google.com" target='_blank'>Boton 1</a>
+            <a mat-button href="https://gmail.com" target='_blank'>Boton 2</a>
+          </span>
+        </div>
+      </mat-toolbar-row>
+  
+      <mat-toolbar-row *ngIf="mobileQuery.matches">
+        <span class="example-spacer"></span>
+        <a mat-button href="https://google.com" target='_blank'>Boton 1</a>
+        <a mat-button href="https://gmail.com" target='_blank'>Boton 2</a>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56*2 : 0">
+      <mat-sidenav #snav [opened]="!mobileQuery.matches" [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56*20" [style.marginTop.px]="mobileQuery.matches ? 56*2 : 0">
+        <div>Barra de navegacion    </div>
+    </mat-sidenav>
+  
+      <mat-sidenav-content>
+        <div>Contenido Principal</div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
