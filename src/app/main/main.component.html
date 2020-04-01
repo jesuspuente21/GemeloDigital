@@ -1,40 +1,64 @@
 <div class="container" [class.is-mobile]="mobileQuery.matches">
-    <mat-toolbar color="primary" id="toolbar">
-      <mat-toolbar-row>
-        <span>
-          <button mat-button>
-            <img src="assets/logo.PNG" (click)= "snav.toggle()" />
-          </button>
-        </span>
-  
-        <span>
-          <button mat-button>Gemelo digital de embarcaciones</button>
-        </span>
-        <!-- This fills the remaining space of the current row -->
-        <span class="flex-filler"></span>
-  
-        <!-- External links -->
-        <div *ngIf="!mobileQuery.matches">
-          <span>
-            <a mat-button href="https://google.com" target='_blank'>Boton 1</a>
-            <a mat-button href="https://gmail.com" target='_blank'>Boton 2</a>
-          </span>
-        </div>
-      </mat-toolbar-row>
-  
-      <mat-toolbar-row *ngIf="mobileQuery.matches">
-        <span class="example-spacer"></span>
-        <a mat-button href="https://google.com" target='_blank'>Boton 1</a>
-        <a mat-button href="https://gmail.com" target='_blank'>Boton 2</a>
-      </mat-toolbar-row>
-    </mat-toolbar>
-    <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56*2 : 0">
-      <mat-sidenav #snav [opened]="!mobileQuery.matches" [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56*20" [style.marginTop.px]="mobileQuery.matches ? 56*2 : 0">
-        <div>Barra de navegacion    </div>
-    </mat-sidenav>
-  
-      <mat-sidenav-content>
-        <div>Contenido Principal</div>
-      </mat-sidenav-content>
-    </mat-sidenav-container>
+  <div class="mat-typography">
+    <img src="assets/logo.png">
+    <h2>Gemelo digital de embarcaciones</h2>
+    <mat-card>
+      <div>
+        <label>Intensidad lumínica:</label>
+        <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="100"
+          (input)="cambiarValorLuz($event)"></mat-slider>
+        <div> {{intensidadLuminica}} lux/s</div>
+      </div>
+      <div>
+        <label>Intensidad del viento: </label>
+        <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="100"
+          (input)="cambiarValorViento($event)"></mat-slider>
+        <div> {{intensidadDelViento}} m/s</div>
+      </div>
+      <div><label>Direccion del viento: </label>
+
+        <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="100"
+          (input)="cambiarValorDirViento($event)"></mat-slider>
+        <div> {{direccionDelViento}} rad</div>
+      </div>
+      <mat-divider></mat-divider>
+      <div>
+        <label>Angulo de giro: </label>
+
+        <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="-45" max="45" value="0"
+          (input)="cambiarValorGiro($event)"></mat-slider>
+        <div> {{giro}} rad</div>
+      </div>
+      <mat-divider></mat-divider>
+      <div>
+        <mat-expansion-panel hideToggle disabled [expanded]="!panel.disabled" #panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <mat-slide-toggle class="example-margin" (change)="panel.disabled = panel.disabled? false: true; ">Limitar
+                variable</mat-slide-toggle>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-radio-group aria-label="Select an option" [(ngModel)]="limitacion">
+            <mat-radio-button value="0">
+              <div class="tiempoydistancia">
+                <label>Tiempo: </label>
+                <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="100"
+                  (input)="cambiarValorTiempo($event)" [disabled]="limitacion == 1 ? true: false"></mat-slider>
+                <div> {{tiempo}} s</div>
+              </div>
+            </mat-radio-button>
+            <mat-radio-button value="1">
+              <div class="tiempoydistancia"><label>Distancia: </label>
+                <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="100"
+                  (input)="cambiarValorDistancia($event)" [disabled]="limitacion == 1 ? false: true"></mat-slider>
+                <div> {{distancia}} m</div>
+              </div>
+            </mat-radio-button>
+          </mat-radio-group>
+        </mat-expansion-panel>
+        <br>
+        <button mat-raised-button color="accent">Simular</button>
+      </div>
+    </mat-card>
   </div>
+</div>
