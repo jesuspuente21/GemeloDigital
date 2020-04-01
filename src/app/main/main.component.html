@@ -1,10 +1,25 @@
+<div class="menu">
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon color="accent">menu_alt</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>event_note</mat-icon>
+          <span>Estadisticas</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>ondemand_video</mat-icon>
+          <span>Simulación libre</span>
+        </button>
+      </mat-menu>
+</div>
 <div class="container" [class.is-mobile]="mobileQuery.matches">
   <div class="mat-typography">
     <img src="assets/logo.png">
     <h2>Gemelo digital de embarcaciones</h2>
     <mat-card>
       <div>
-        <label>Intensidad lumínica:</label>
+        <label>Intensidad del sol:</label>
         <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="100"
           (input)="cambiarValorLuz($event)"></mat-slider>
         <div> {{intensidadLuminica}} lux/s</div>
@@ -57,7 +72,7 @@
           </mat-radio-group>
         </mat-expansion-panel>
         <br>
-        <button mat-raised-button color="accent">Simular</button>
+        <button mat-raised-button color="accent">Ver Simulacion</button>
       </div>
     </mat-card>
   </div>
