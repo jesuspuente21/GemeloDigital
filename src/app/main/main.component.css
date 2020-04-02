@@ -24,7 +24,7 @@ text-align: center;
 }
 mat-card {
     text-align: left;
-    background-color: #E0F7FA;
+    background-color: white;
 }
 
 mat-card div {
@@ -35,7 +35,7 @@ mat-card div {
     width: 10em;
 }
 mat-expansion-panel{
-    background-color: #B2EBF2;
+    background-color: #C5CAE9;
 }
 
 mat-slider {
@@ -60,10 +60,10 @@ vertical-align: middle;
 }
 
 h2 {
-    color: lightgrey;
+    color: #1A237E;
 }
 button{
-    width: 100%
+    width: 100%;
 }
 
 .menu {

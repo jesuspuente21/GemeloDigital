@@ -3,11 +3,11 @@
         <mat-icon color="accent">menu_alt</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>
+        <button mat-menu-item routerLink="/estadisticas">
           <mat-icon>event_note</mat-icon>
           <span>Estadisticas</span>
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item routerLink="/simulacion">
           <mat-icon>ondemand_video</mat-icon>
           <span>Simulación libre</span>
         </button>
@@ -72,7 +72,7 @@
           </mat-radio-group>
         </mat-expansion-panel>
         <br>
-        <button mat-raised-button color="accent">Ver Simulacion</button>
+        <button mat-raised-button color="accent" routerLink="/simulacion">Ver Simulacion</button>
       </div>
     </mat-card>
   </div>

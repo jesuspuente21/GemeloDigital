@@ -14,6 +14,12 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatTreeModule} from '@angular/material/tree';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+
+
 
 @NgModule({
    imports: [
@@ -31,6 +37,7 @@ import {MatDividerModule} from '@angular/material/divider';
       MatSliderModule,
       MatButtonToggleModule,
       MatDividerModule,
+      MatGridListModule,
    ],
    exports: [
         CommonModule,
@@ -47,6 +54,10 @@ import {MatDividerModule} from '@angular/material/divider';
         MatSliderModule,
         MatButtonToggleModule,
         MatDividerModule,
+        MatGridListModule,
+        MatTabsModule,
+        MatFormFieldModule,
+        MatSelectModule,
    ],
    providers: [
    ]

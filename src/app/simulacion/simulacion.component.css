@@ -1,0 +1,15 @@
+mat-grid-list {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+mat-card{
+    width:90%;
+    top: 0.5em;
+    bottom: 0.5em;
+    position: inherit;
+
+}

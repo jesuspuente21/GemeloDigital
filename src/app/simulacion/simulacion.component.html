@@ -1,0 +1,8 @@
+<mat-grid-list cols="5" rowHeight="14%">
+        <mat-grid-tile
+            *ngFor="let tile of tiles"
+            [colspan]="tile.cols"
+            [rowspan]="tile.rows">
+            <mat-card>{{tile.text}}</mat-card>
+        </mat-grid-tile>
+</mat-grid-list>

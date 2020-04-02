@@ -1,0 +1,41 @@
+<mat-card>
+    <h2>Estadisticas</h2>
+    <div id="coordenadas">
+        <mat-form-field>
+            <div id="x">
+                <mat-label>Coordenada X</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let variable of variables" [value]="variable">
+                        {{variable}}
+                    </mat-option>
+                </mat-select>
+            </div>
+        </mat-form-field>
+        <mat-form-field>
+            <div id="x">
+                <mat-label>Coordenada Y</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let variable of variables" [value]="variable">
+                        {{variable}}
+                    </mat-option>
+                </mat-select>
+            </div>
+        </mat-form-field>
+    </div>
+    <div>
+        <button mat-raised-button class="example-add-tab-button">
+            Añadir grafica
+        </button>
+    </div>
+</mat-card>
+<mat-card>
+    <mat-tab-group>
+
+        <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab">
+            Contenido pestaña {{tab}}
+            <button mat-raised-button class="example-delete-tab-button">
+                Eliminar pestaña
+            </button>
+        </mat-tab>
+    </mat-tab-group>
+</mat-card>
