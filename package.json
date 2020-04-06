@@ -26,6 +26,8 @@
     "@angular/platform-browser-dynamic": "~9.0.3",
     "@angular/router": "~9.0.3",
     "electron-debug": "^3.0.1",
+    "p5": "^1.0.0",
+    "pvector": "^1.1.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
@@ -37,7 +39,7 @@
     "@angular/language-service": "~9.0.3",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
-    "@types/node": "^12.11.1",
+    "@types/node": "^12.12.34",
     "codelyzer": "^5.1.2",
     "electron": "^8.0.3",
     "jasmine-core": "~3.5.0",

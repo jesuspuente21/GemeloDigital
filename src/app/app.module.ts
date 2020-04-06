@@ -9,13 +9,15 @@ import { MainComponent } from './main/main.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SimulacionComponent } from './simulacion/simulacion.component';
 import { EstadisticasComponent } from './estadisticas/estadisticas.component';
+import { P5modelComponent } from './p5model/p5model.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     SimulacionComponent,
-    EstadisticasComponent
+    EstadisticasComponent,
+    P5modelComponent
   ],
   imports: [
     AngularMaterialModule,
