@@ -26,6 +26,7 @@ export class P5modelComponent implements AfterViewInit {
 
       var movers
       var grid
+      var force
 
       var Grid = function (x, y, xscale, yscale) {
         this.xorigin = 0;
@@ -58,19 +59,19 @@ export class P5modelComponent implements AfterViewInit {
               this.printLines(x, y)
             }
           }
-        }else if(dirx && !diry) {
+        } else if (dirx && !diry) {
           for (var x = this.xorigin; x < this.realwidth; x += this.scale.x) {
             for (var y = this.yorigin; y < this.realheight; y += this.scale.y) {
               this.printLines(x, y)
             }
           }
-        }else if(!dirx && diry){
+        } else if (!dirx && diry) {
           for (var x = this.realwidth; x > this.xorigin; x -= this.scale.x) {
             for (var y = this.realheight; y > this.yorigin; y -= this.scale.y) {
               this.printLines(x, y)
             }
           }
-        }else {
+        } else {
           for (var x = this.realwidth; x > this.xorigin; x -= this.scale.x) {
             for (var y = this.yorigin; y < this.realheight; y += this.scale.y) {
               this.printLines(x, y)
@@ -93,10 +94,10 @@ export class P5modelComponent implements AfterViewInit {
 
       Mover.prototype.update = function () {
         this.velocity.add(this.acceleration);
-        if (this.position.y > (s.height - s.height / 10) || this.position.y < (s.height / 10)) grid.update(0, this.velocity.y);
-        else this.position.y += this.velocity.y
-        if (this.position.x > (s.width - s.width / 10) || this.position.x < (s.width / 10)) grid.update(this.velocity.x, 0);
-        else this.position.x += this.velocity.x
+        if (this.position.y + this.velocity.y / grid.scale.y > (s.height - s.height / 10) || this.position.y + this.velocity.y / grid.scale.y < (s.height / 10)) grid.update(0, this.velocity.y / grid.scale.y);
+        else this.position.y += this.velocity.y / grid.scale.y
+        if (this.position.x + this.velocity.x / grid.scale.x > (s.width - s.width / 10) || this.position.x + this.velocity.x / grid.scale.x < (s.width / 10)) grid.update(this.velocity.x / grid.scale.x, 0);
+        else this.position.x += this.velocity.x / grid.scale.x
         this.acceleration.mult(0);
       };
 
@@ -111,6 +112,7 @@ export class P5modelComponent implements AfterViewInit {
         var bounds = document.getElementById('sketch-holder').getBoundingClientRect();
         movers = new Mover(s.random(0.5, 3), s.width / 2, s.height - s.height / 8);
         grid = new Grid(bounds.width, bounds.height, bounds.width / 15, bounds.height / 15)
+        force = new PVector(0.00 * movers.mass, -0.9 * movers.mass);
       }
 
       s.setup = () => {
@@ -124,15 +126,19 @@ export class P5modelComponent implements AfterViewInit {
       s.draw = () => {
 
         s.background('#1A237E');
-        var force = new PVector(0.01 * movers.mass, -0.1 * movers.mass);
+       /* counter++;
+        if (counter === 500) {
+          console.log(force.y + "-----------------------")
+          force.y = force.y * -1
+        }*/
         // Apply gravity
         movers.applyForce(force);
 
         // Update and display
         movers.update();
-        grid.display(force.x > 0, force.y < 0)
+        grid.display(movers.velocity.x > 0, movers.velocity.y < 0)
         movers.display();
-        console.log(grid.scale.y)
+        console.log(movers.velocity.y)
       };
 
     };

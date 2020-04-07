@@ -19,7 +19,6 @@ export class MainComponent implements OnInit {
   tiempo: number;
   distancia: number;
   limitacion: number= 0;
-  limitar: boolean = false;
 
   private _mobileQueryListener: () => void;
 
