@@ -26,7 +26,6 @@ export class P5modelComponent implements AfterViewInit {
 
       var movers
       var grid
-      var force
       var wind
       var bounds = document.getElementById('sketch-holder').getBoundingClientRect();
       var Drag = function(c, turbulence) {
@@ -102,13 +101,15 @@ export class P5modelComponent implements AfterViewInit {
         }
       }
 
-      var Mover = function (m, x, y) {
+      var Mover = function (m, x, y, angle, thrust) {
         this.mass = m;
         this.position = new PVector(x, y);
         this.velocity = new PVector(0, 0);
         this.acceleration = new PVector(0, 0);
         this.xvals = []
         this.yvals = []
+        this.angle = angle;
+        this.force = new PVector(0.00 * this.mass, -thrust * this.mass);
       };
 
       Mover.prototype.applyForce = function (force) {
@@ -116,13 +117,23 @@ export class P5modelComponent implements AfterViewInit {
         this.acceleration.add(f);
       };
 
+      Mover.prototype.thrust = function () {
+        var f = PVector.div(this.force, this.mass);
+        f.rotate(this.angle)
+        this.acceleration.add(f);
+        this.force = new PVector(f.x*this.mass, f.y*this.mass)
+      }
+
+
+
       Mover.prototype.update = function () {
         this.velocity.add(this.acceleration);
-        if (this.position.y + this.velocity.y >= (s.height - s.height / 10) || this.position.y + this.velocity.y< (s.height / 10)) grid.update(0, this.velocity.y);
+        if (this.position.y + this.velocity.y >= ( (grid.realheight - grid.yorigin) -  (grid.realheight - grid.yorigin) / 10) || this.position.y + this.velocity.y< ( (grid.realheight - grid.yorigin) / 10)) grid.update(0, this.velocity.y);
         this.position.y += this.velocity.y
-        if (this.position.x + this.velocity.x >= (s.width - s.width / 10) || this.position.x + this.velocity.x < (s.width / 10)) grid.update(this.velocity.x, 0);
+        if (this.position.x + this.velocity.x >= ((grid.realwidth - grid.xorigin) - (grid.realwidth - grid.xorigin) / 10) || this.position.x + this.velocity.x < ((grid.realwidth - grid.xorigin) / 10)) grid.update(this.velocity.x, 0);
         this.position.x += this.velocity.x
         this.acceleration.mult(0);
+
         this.xvals.push((this.position.x))
         this.yvals.push((this.position.y))
       };
@@ -133,7 +144,12 @@ export class P5modelComponent implements AfterViewInit {
         s.fill(123, 217, 176);
         var boatx = s.map(this.position.x, grid.xorigin, grid.realwidth, 0 , bounds.width)
         var boaty = s.map(this.position.y, grid.yorigin, grid.realheight, 0 , bounds.height)
-        s.triangle(boatx - this.mass *2000/  (grid.realwidth - grid.xorigin), boaty, boatx + this.mass  *2000/  (grid.realwidth - grid.xorigin), boaty, boatx, boaty - 2 * this.mass  *3000/  (grid.realheight - grid.yorigin));
+        s.push();
+        s.translate(boatx, boaty);
+        s.rotate(this.force.heading() + s.HALF_PI);
+        s.triangle( - this.mass *2000/  (grid.realwidth - grid.xorigin), 0,this.mass  *2000/  (grid.realwidth - grid.xorigin), 0, 0, -2 * this.mass  *3000/  (grid.realheight - grid.yorigin));
+        s.pop();
+        
         for (let i = 0; i < this.xvals.length; i++) {
           let px = s.map(this.xvals[i],  grid.xorigin  , grid.realwidth, 0, bounds.width) 
           let py = s.map(this.yvals[i], grid.yorigin, grid.realheight , 0, bounds.height) 
@@ -145,10 +161,10 @@ export class P5modelComponent implements AfterViewInit {
 
       var reset = function () {
         
-        movers = new Mover(2, s.width / 2, s.height - s.height / 8);
+        movers = new Mover(2, s.width / 2, s.height - s.height / 8, 0.001, 0.03);
         grid = new Grid(bounds.width, bounds.height, bounds.width / 15, bounds.height / 15)
-        force = new PVector(0.00 * movers.mass, -0.03 * movers.mass);
-        wind = new PVector(0.0008 * movers.mass, 0 * movers.mass);
+
+        wind = new PVector(-0.009 * movers.mass, 0.007 * movers.mass);
       }
 
       s.setup = () => {
@@ -158,7 +174,7 @@ export class P5modelComponent implements AfterViewInit {
         reset();
       };
 
-      var drag = new Drag(0.02, 1.5);
+      var drag = new Drag(0.009, 1.8);
 
       s.draw = () => {
 
@@ -171,14 +187,16 @@ export class P5modelComponent implements AfterViewInit {
         var dragForce = drag.calculateDrag(movers);
         movers.applyForce(dragForce);
         // Apply gravity
-        movers.applyForce(force);
+        //movers.applyForce(force);
+        movers.thrust();
         movers.applyForce(wind);
 
         // Update and display
+        console.log(movers.velocity.mag())
         movers.update();
         grid.display(movers.velocity.x < 0, movers.velocity.y < 0)
         movers.display();
-        console.log(movers.velocity.y)
+        //console.log(movers.acceleration)
       };
 
     };
