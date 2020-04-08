@@ -24,9 +24,29 @@ export class SimulacionComponent implements OnInit {
     {text: 'Distancia/tiempo/velocidadyaceleracion actual', cols: 3, rows: 2, color: 'yellow'},
   ];
 
+  intensidadDelViento: number;
+  intensidadLuminica: number;
+  direccionDelViento: number;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  cambiarValorViento(event) {
+    this.intensidadDelViento = event.value;
+  }
+
+  cambiarValorDirViento(event){
+    this.direccionDelViento = event.value;
+  }
+
+  cambiarValorLuz(event) {
+    this.intensidadLuminica = event.value;
+  }
+
+  formatLabel(value: number) {
+    return value;
   }
 
 }

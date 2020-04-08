@@ -11,7 +11,7 @@ var PVector = require('PVector');
 export class P5modelComponent implements AfterViewInit {
 
   canvas: any;
-  strokeWeight = 0.5;
+  strokeWeight = 0.3;
   strokeColor = '#9FA8DA';
 
   constructor() { }
@@ -137,7 +137,8 @@ export class P5modelComponent implements AfterViewInit {
         for (let i = 0; i < this.xvals.length; i++) {
           let px = s.map(this.xvals[i],  grid.xorigin  , grid.realwidth, 0, bounds.width) 
           let py = s.map(this.yvals[i], grid.yorigin, grid.realheight , 0, bounds.height) 
-          s.stroke('#F9A825')
+          s.strokeWeight(2)
+          s.stroke('#FFE082')
           s.point(px, py);
         }
       };
@@ -147,7 +148,7 @@ export class P5modelComponent implements AfterViewInit {
         movers = new Mover(2, s.width / 2, s.height - s.height / 8);
         grid = new Grid(bounds.width, bounds.height, bounds.width / 15, bounds.height / 15)
         force = new PVector(0.00 * movers.mass, -0.03 * movers.mass);
-        wind = new PVector(0.08 * movers.mass, 0 * movers.mass);
+        wind = new PVector(0.0008 * movers.mass, 0 * movers.mass);
       }
 
       s.setup = () => {

@@ -5,17 +5,50 @@
             [rowspan]="tile.rows">
             <mat-card>{{tile.text}}</mat-card>
         </mat-grid-tile-->
-        <mat-grid-tile [colspan]="tiles[0].cols"[rowspan]="tiles[0].rows"><mat-card>
-            <h1>Rendimiento</h1>
-        </mat-card></mat-grid-tile>
+        <mat-grid-tile [colspan]="tiles[0].cols"[rowspan]="tiles[0].rows">
+                <img src="assets/logo.png">
+        </mat-grid-tile>
         <mat-grid-tile [colspan]="tiles[1].cols"[rowspan]="tiles[1].rows"><mat-card id="modelo"><app-p5model></app-p5model></mat-card></mat-grid-tile>
         <mat-grid-tile [colspan]="tiles[2].cols"[rowspan]="tiles[2].rows"><mat-card>
-            <h1>Valores para el rendimiento optimo</h1>
+                <mat-toolbar color="accent" id="toolbar">
+                        <h2>Valores simulados</h2>
+                        
+                    </mat-toolbar>
+                    <br>
+                    <p>Velocidad</p>
+                        <p>Acelereacion</p>
         </mat-card></mat-grid-tile>
         <mat-grid-tile [colspan]="tiles[3].cols"[rowspan]="tiles[3].rows"><mat-card>
-            <h1>Variables</h1>
+                <mat-toolbar color="accent" id="toolbar">
+                        <h2>Variables</h2>
+                    </mat-toolbar>
+                    <br>
+            <div>
+                    <label>Intensidad del sol:</label>
+                    <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="100"
+                      (input)="cambiarValorLuz($event)"></mat-slider>
+                    <div> {{intensidadLuminica}} lux/s</div>
+                  </div>
+                  <div>
+                    <label>Intensidad del viento: </label>
+                    <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="100"
+                      (input)="cambiarValorViento($event)"></mat-slider>
+                    <div> {{intensidadDelViento}} m/s</div>
+                  </div>
+                  <div><label>Direccion del viento: </label>
+            
+                    <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="100"
+                      (input)="cambiarValorDirViento($event)"></mat-slider>
+                    <div> {{direccionDelViento}} rad</div>
+                  </div>
         </mat-card></mat-grid-tile>
         <mat-grid-tile [colspan]="tiles[4].cols"[rowspan]="tiles[4].rows"><mat-card>
-            <h1>Valores actuales</h1>
+                <mat-toolbar color="accent" id="toolbar">
+                        <h2>Factor limitante: Tiempo/Distancia</h2>
+                        
+                    </mat-toolbar>
+                    <br>
+                    <p>Velocidad</p>
+                        <p>Acelereacion</p>
         </mat-card></mat-grid-tile>
 </mat-grid-list>
