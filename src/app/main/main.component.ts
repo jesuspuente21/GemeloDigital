@@ -16,6 +16,7 @@ export class MainComponent implements OnInit {
   intensidadLuminica: number;
   direccionDelViento: number;
   giro: number;
+  velocidadInicial: number;
   tiempo: number;
   distancia: number;
   limitacion: number= 0;
@@ -30,6 +31,7 @@ export class MainComponent implements OnInit {
     this.intensidadLuminica = 0;
     this.direccionDelViento = 0;
     this.giro = 0;
+    this.velocidadInicial = 0;
     this.tiempo = 0;
     this.distancia = 0;
   
@@ -64,5 +66,9 @@ export class MainComponent implements OnInit {
 
   cambiarValorDistancia(event) {
     this.distancia = event.value;
+  }
+
+  cambiarValorVelocidad(event) {
+    this.velocidadInicial = event.value;
   }
 }

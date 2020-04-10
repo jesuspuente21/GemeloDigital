@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from "@angular/router";
+import { P5modelComponent } from "../p5model/p5model.component"
 
 export interface Tile {
-  color: string;
   cols: number;
   rows: number;
   text: string;
@@ -16,37 +17,42 @@ export interface Tile {
 
 export class SimulacionComponent implements OnInit {
 
+  @ViewChild(P5modelComponent) private mapa: P5modelComponent;
+
   tiles: Tile[] = [
-    {text: 'Rendimiento del barco', cols: 2, rows: 2, color: 'lightblue'},
-    {text: 'Simulacion', cols: 3, rows: 5, color: 'lightgreen'},
-    {text: 'Valores para rendimiento optimo', cols: 2, rows: 2, color: 'lightpink'},
-    {text: 'Sliders', cols: 2, rows: 3, color: '#DDBDF1'},
-    {text: 'Distancia/tiempo/velocidadyaceleracion actual', cols: 3, rows: 2, color: 'yellow'},
+    {text: 'Logo', cols: 2, rows: 2},
+    {text: 'Simulacion', cols: 3, rows: 5},
+    {text: 'Valores Simulados', cols: 2, rows: 2},
+    {text: 'Variables de Entrada', cols: 2, rows: 3},
+    {text: 'Factor limitante: ', cols: 2, rows: 2},
+    {text: 'Controles', cols: 1, rows: 2},
   ];
 
   intensidadDelViento: number;
   intensidadLuminica: number;
   direccionDelViento: number;
+  anguloDeGiro: number;
+  velocidadInicial: number;
+  tiempo: number;
+  distancia: number;
+  tiempoEsCero: number;
+  plano: P5modelComponent
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) {
+    this.route.params.subscribe(params => {
+      this.intensidadDelViento = params.v;
+      this.intensidadLuminica = params.sol;
+      this.direccionDelViento = params.dirv;
+      this.anguloDeGiro = params.giro;
+      this.velocidadInicial = params.vel;
+      this.tiempo = params.t;
+      this.distancia = params.d;
+      this.tiempoEsCero = params.lim
+      this.plano = this.mapa;
+    });
+  }
 
   ngOnInit(): void {
-  }
-
-  cambiarValorViento(event) {
-    this.intensidadDelViento = event.value;
-  }
-
-  cambiarValorDirViento(event){
-    this.direccionDelViento = event.value;
-  }
-
-  cambiarValorLuz(event) {
-    this.intensidadLuminica = event.value;
-  }
-
-  formatLabel(value: number) {
-    return value;
   }
 
 }

@@ -43,6 +43,13 @@ mat-slider {
 
 }
 
+#barco label {
+    width: 20%;
+}
+#barco mat-slider {
+    width: 150px;
+}
+
 label {
     display: inline-block;
     width: 35%;

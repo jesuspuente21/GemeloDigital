@@ -5,27 +5,53 @@ mat-grid-list {
     width: 100%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
+    line-height: 2.8;
 }
 mat-card{
     width:90%;
     top: 0.5em;
     bottom: 0.5em;
     position: inherit;
+    padding: 0;
 }
 
 #modelo {
     background-color: #FFE082;
-
+    padding: 1em;
 }
 
+mat-toolbar {
+    border-radius: 0.2em;
+}
 
 label {
     display: inline-block;
     width: 40%;
     text-align: right;
+    
 }
+
+.factorLimitante label{
+    width: 50%;
+}
+
+.factorLimitante mat-card{
+    height: max-content;
+}
+
+.valoresSimulados mat-card{
+    height: max-content;
+    line-height: 3.9;
+}
+
+.valoresDeEntrada mat-card{
+    height: max-content;
+    line-height: 3.2;
+}
+
 mat-card div {
-    display: inline
+    display: inline;
+
 }
 
 mat-slider {
@@ -37,3 +63,18 @@ img {
     height: 13em;
     vertical-align: middle;
     }
+
+.spacer{
+       flex: 1 1 auto;
+       display: inline-block;
+       width: 30%;
+}
+
+
+.botones button{
+    display: block;
+    text-align: center;
+    margin: auto;
+    width: 100%;
+    margin-bottom: 1em;
+}

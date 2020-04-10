@@ -37,12 +37,15 @@
         <div> {{direccionDelViento}} rad</div>
       </div>
       <mat-divider></mat-divider>
-      <div>
+      <div id="barco">
         <label>Angulo de giro: </label>
-
         <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="-45" max="45" value="0"
           (input)="cambiarValorGiro($event)"></mat-slider>
         <div> {{giro}} rad</div>
+        <label>Velocidad inicial: </label>
+        <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="100" value="0"
+          (input)="cambiarValorVelocidad($event)"></mat-slider>
+        <div> {{velocidadInicial}} m/s</div>
       </div>
       <mat-divider></mat-divider>
       <div>
@@ -72,7 +75,7 @@
           </mat-radio-group>
         </mat-expansion-panel>
         <br>
-        <button mat-raised-button color="accent" [routerLink]="['/simulacion', {giro: giro, sol: intensidadLuminica, v: intensidadDelViento, dirv: direccionDelViento, lim: limitacion, t: tiempo, d: distancia}]">Ver Simulacion</button>
+        <button mat-raised-button color="accent" [routerLink]="['/simulacion', {giro: giro,vel: velocidadInicial, sol: intensidadLuminica, v: intensidadDelViento, dirv: direccionDelViento, lim: limitacion, t: tiempo, d: distancia}]">Ver Simulacion</button>
       </div>
     </mat-card>
   </div>

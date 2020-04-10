@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SimulacionComponent } from './simulacion/simulacion.component';
 import { EstadisticasComponent } from './estadisticas/estadisticas.component';
 import { P5modelComponent } from './p5model/p5model.component';
+import { GraficaComponent } from './grafica/grafica.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { P5modelComponent } from './p5model/p5model.component';
     MainComponent,
     SimulacionComponent,
     EstadisticasComponent,
-    P5modelComponent
+    P5modelComponent,
+    GraficaComponent
   ],
   imports: [
     AngularMaterialModule,
