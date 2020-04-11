@@ -65,15 +65,14 @@ export class P5modelComponent implements AfterViewInit {
       var lineColor
       var windVector
 
-      var Drag = function (c, turbulence) {
+      var Drag = function (c) {
         this.c = c;
-        this.turbulence = turbulence;
       };
 
       Drag.prototype.calculateDrag = function (m) {
         // Magnitude is coefficient * speed ^(turbulence)
         var speed = m.velocity.mag();
-        var dragMagnitude = this.c * s.pow(speed, this.turbulence);
+        var dragMagnitude = this.c * s.pow(speed, 2);
 
         // Direction is inverse of velocity
         var dragForce = m.velocity.clone();
@@ -200,10 +199,10 @@ export class P5modelComponent implements AfterViewInit {
       };
 
       var reset = function (): void {
-        mover = new Mover(2, s.width / 2, s.height - s.height / 8, -0.001, 0.03);
+        mover = new Mover(2, s.width / 2, s.height - s.height / 8, -0.00, 0.23);
         grid = new Grid(bounds.width, bounds.height, bounds.width / 15, bounds.height / 15)
         wind = new PVector(0.009 * mover.mass, 0.007 * mover.mass);
-        drag = new Drag(0.09, 1.8);
+        drag = new Drag(0.09);
         secondsElapsed = 0
       }
 

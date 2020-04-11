@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import {FormControl} from '@angular/forms';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { GraficaComponent } from "../grafica/grafica.component"
 
 
-interface Variables {
-  value: string;
-  viewValue: string;
+export interface Variable {
+  displayName: string;
+  name: number;
+
 }
 
 @Component({
@@ -12,25 +13,40 @@ interface Variables {
   templateUrl: './estadisticas.component.html',
   styleUrls: ['./estadisticas.component.css']
 })
-export class EstadisticasComponent implements OnInit {
-  variables: String[] = ['Velocidad', 'Potencia', 'Aceleracion', 'Desviacion', 'Intensidad Solar', 'Direccion del Viento', 'Intensidad del Viento', 'Tiempo']
-  tabs = ['Velocidad - Potencia', 'Aceleracion - Desviacion', 'Intensidad Solar - Tiempo'];
-  selected = new FormControl(0);
-  cx: String = ""
-  cy: String = ""
-  constructor() { }
 
-  ngOnInit(): void {
-  }
-  addTab(cx:String, cy:String){
-    if(cx !== "" && cy !=="" && cx!==cy){
-    this.tabs.push(cx + ' - ' + cy);
-    this.selected.setValue(this.tabs.length - 1);
+
+
+export class EstadisticasComponent implements AfterViewInit {
+
+  @ViewChild(GraficaComponent) private graph: GraficaComponent;
+
+  variablesy: Variable[] = [
+    {displayName:'Velocidad Terminal (m/s)', name: 3},
+    {displayName: 'Potencia ofrecida por el panel solar (W)', name: 7},
+    {displayName: 'Tiempo en alcanzar la velocidad terminal (s)', name: 5}]
+  variablesx: Variable[] = [
+    {displayName: 'Potencia ofrecida por el panel solar (W)', name: 7},
+    {displayName: 'Intensidad Solar (lux)',  name: 11},
+    {displayName: 'Direccion del Viento (rad)', name:13},
+    {displayName: 'Intensidad del Viento (m/s)', name: 17}]
+  cx: number = 0;
+  cy: number = 0;
+  selected: number
+    
+
+  constructor() {
+    
+  } 
+
+  ngAfterViewInit(): void {
+    this.graph.startCanvas(21)
     }
-  }
 
-  removeTab(index: number) {
-    this.tabs.splice(index, 1);
+
+  actualizarGrafica(cx, cy){
+    this.selected = cx*cy
+    this.graph.startCanvas(this.selected)
+    console.log(this.selected)
   }
 
 }

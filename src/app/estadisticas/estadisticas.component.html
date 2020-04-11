@@ -14,8 +14,8 @@
                 <div id="x">
                     <mat-label>Coordenada X</mat-label>
                     <mat-select [(value)]="cx">
-                        <mat-option *ngFor="let variable of variables" [value]="variable">
-                            {{variable}}
+                        <mat-option *ngFor="let variable of variablesx" [value]="variable.name">
+                            {{variable.displayName}}
                         </mat-option>
                     </mat-select>
                 </div>
@@ -24,28 +24,23 @@
                 <div id="x">
                     <mat-label>Coordenada Y</mat-label>
                     <mat-select [(value)]="cy">
-                        <mat-option *ngFor="let variable of variables" [value]="variable">
-                            {{variable}}
+                        <mat-option *ngFor="let variable of variablesy" [value]="variable.name">
+                            {{variable.displayName}}
                         </mat-option>
                     </mat-select>
                 </div>
             </mat-form-field>
         </div>
         <div>
-            <button mat-raised-button class="example-add-tab-button" (click)="addTab(cx, cy)">
-                Añadir grafica
+            <button mat-raised-button class="example-add-tab-button" (click)="actualizarGrafica(cx, cy)">
+                Representar gráfica
             </button>
         </div>
     </mat-card>
-    <mat-card>
-        <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
-            <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab">
-                Contenido pestaña {{tab}}
-                <button mat-raised-button class="example-delete-tab-button" [disabled]="tabs.length === 1"
-                    (click)="removeTab(index)">
-                    Eliminar pestaña
-                </button>
-            </mat-tab>
-        </mat-tab-group>
+    <mat-card id="tabs">
+                <div style="height: 60vh">
+                <app-grafica #graph chart="selected"></app-grafica>
+               
+            </div>
     </mat-card>
 </div>
