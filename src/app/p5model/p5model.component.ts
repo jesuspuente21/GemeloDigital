@@ -43,6 +43,7 @@ export class P5modelComponent implements AfterViewInit {
       var paused: boolean = false;
       var interval
       var secondsElapsed: number = 0;
+      var fr = 60
 
       //Environment elements
       var mover
@@ -52,18 +53,17 @@ export class P5modelComponent implements AfterViewInit {
       var bounds = document.getElementById('sketch-holder').getBoundingClientRect();
 
       //Environment variables
-      var fluidDragConstant
-      var fluidVelocityRelation
-      var modelMass
-      var modelInitialVelocity
-      var modelTurnAngle
-      var modelThrustPower
-      var modelSize
-      var modelColor
-      var canvasLimit
-      var canvasColor
-      var lineColor
-      var windVector
+      var fluidDragConstant = 0.05
+      var modelMass = 4
+      var modelInitialVelocity = new PVector(0, 0);
+      var modelTurnAngle = s.map(angleRateOfChange, -45, 45, -0.005, 0.005)//0
+      var modelThrustPower = s.map(sunlight, 0, 7000, 0, 0.004)//0.23
+      var modelSize = 1000
+      var modelColor = {r:123, g:217, b: 176}
+      var canvasColor = '#1A237E'
+      var lineColor = '#FFE082';
+      windMagnitude = s.map(windMagnitude, 0, 100, 0, 0.0002)
+      var windVector = {x:windMagnitude* s.sin(s.map(windDir, 0, 360, 0, 2 * Math.PI)), y:windMagnitude* s.cos(s.map(windDir, 0, 360, 0, 2 * Math.PI))}
 
       var Drag = function (c) {
         this.c = c;
@@ -136,10 +136,10 @@ export class P5modelComponent implements AfterViewInit {
         }
       }
 
-      var Mover = function (m, x, y, angle, thrust) {
+      var Mover = function (m, x, y, angle, thrust, initialVelocity) {
         this.mass = m;
         this.position = new PVector(x, y);
-        this.velocity = new PVector(0, 0);
+        this.velocity = initialVelocity.clone()
         this.acceleration = new PVector(0, 0);
         this.xvals = []
         this.yvals = []
@@ -176,13 +176,13 @@ export class P5modelComponent implements AfterViewInit {
       Mover.prototype.display = function () {
         s.stroke(sc);
         s.strokeWeight(sw);
-        s.fill(123, 217, 176);
+        s.fill(modelColor.r, modelColor.g, modelColor.b);
         var boatx = s.map(this.position.x, grid.xorigin, grid.realwidth, 0, bounds.width)
         var boaty = s.map(this.position.y, grid.yorigin, grid.realheight, 0, bounds.height)
         s.push();
         s.translate(boatx, boaty);
         s.rotate(this.force.heading() + s.HALF_PI);
-        s.triangle(- this.mass * 2000 / (grid.realwidth - grid.xorigin), 0, this.mass * 2000 / (grid.realwidth - grid.xorigin), 0, 0, -2 * this.mass * 3000 / (grid.realheight - grid.yorigin));
+        s.triangle(- this.mass * modelSize / (grid.realwidth - grid.xorigin), 0, this.mass * modelSize / (grid.realwidth - grid.xorigin), 0, 0, -2 * this.mass * modelSize / (grid.realheight - grid.yorigin) * 3/2);
         s.pop();
         let px
         let py
@@ -190,7 +190,7 @@ export class P5modelComponent implements AfterViewInit {
           px = s.map(this.xvals[i], grid.xorigin, grid.realwidth, 0, bounds.width)
           py = s.map(this.yvals[i], grid.yorigin, grid.realheight, 0, bounds.height)
           s.strokeWeight(2)
-          s.stroke('#FFE082')
+          s.stroke(lineColor)
           s.point(px, py);
           
         }
@@ -199,17 +199,17 @@ export class P5modelComponent implements AfterViewInit {
       };
 
       var reset = function (): void {
-        mover = new Mover(2, s.width / 2, s.height - s.height / 8, -0.00, 0.23);
+        mover = new Mover(modelMass, s.width / 2, s.height - s.height / 8, modelTurnAngle, modelThrustPower, modelInitialVelocity);
         grid = new Grid(bounds.width, bounds.height, bounds.width / 15, bounds.height / 15)
-        wind = new PVector(0.009 * mover.mass, 0.007 * mover.mass);
-        drag = new Drag(0.09);
+        wind = new PVector(windVector.x * mover.mass, windVector.y * mover.mass);
+        drag = new Drag(fluidDragConstant);
         secondsElapsed = 0
       }
 
       var playPause = function(): void {
         paused = paused? false: true;
-        if(paused)clearInterval(interval)
-        else if(!paused)setInterval(counter, 1000)
+        //if(paused)clearInterval(interval)
+       // else if(!paused)setInterval(counter, 1000)
       }
 
       var isPaused = function(): boolean {
@@ -224,18 +224,19 @@ export class P5modelComponent implements AfterViewInit {
         let canvas = s.createCanvas(bounds.width, bounds.height);
         canvas.parent('sketch-holder');
         s.rect(0, 0, s.width, s.height);
+        s.frameRate(fr);
         this.resetSimulation = reset;
         this.playPauseSimulation = playPause;
         this.simulationPaused = isPaused;
        
         reset();
-         interval = setInterval(counter, 1000);
+         //interval = setInterval(counter, 1000);
 
 
      }
 
       s.draw = () => {
-        s.background('#1A237E');
+        s.background(canvasColor);
 
         if(!isPaused()){
 
@@ -250,10 +251,10 @@ export class P5modelComponent implements AfterViewInit {
         var previousPosition = mover.position.clone()
         this.secondsElapsed = secondsElapsed;
         mover.update();
-        this.modelTravel += PVector.sub(previousPosition,mover.position).mag();
-        this.modelDistance = PVector.sub(mover.position,PVector( s.width / 2, s.height - s.height / 8)).mag();
-        }
-
+        this.modelTravel += PVector.sub(previousPosition,mover.position).mag()/2;
+        this.modelDistance = PVector.sub(mover.position,PVector( s.width / 2, s.height - s.height / 8)).mag()/2;
+        if(s.frameCount%fr== 0) secondsElapsed++;
+      }
         grid.display(mover.velocity.x < 0, mover.velocity.y < 0)
         //s.line(mover.position.x, mover.position.y, mover.xvals[0], mover.yvals[0])
         mover.display();

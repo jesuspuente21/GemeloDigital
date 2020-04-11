@@ -7,8 +7,8 @@
                 <mat-toolbar color="accent" id="toolbar">
                         <h2>{{tiles[2].text}}</h2> 
                     </mat-toolbar>
-                    <label>Velocidad:</label><span class="spacer"></span><div *ngIf="this.plano.modelVariables !== undefined">{{this.plano.modelVariables.velocity.mag().toFixed(3)}} m/s</div><mat-divider></mat-divider>
-                    <label>Aceleración:</label><span class="spacer"></span><div *ngIf="this.plano.modelVariables !== undefined">{{this.plano.modelAcceleration.mag().toFixed(3)}} m/s<sup>2</sup></div>
+                    <label>Velocidad:</label><span class="spacer"></span><div *ngIf="this.plano.modelVariables !== undefined">{{(this.plano.modelVariables.velocity.mag()*30).toFixed(3)}} m/s</div><mat-divider></mat-divider>
+                    <label>Aceleración:</label><span class="spacer"></span><div *ngIf="this.plano.modelVariables !== undefined">{{(this.plano.modelAcceleration.mag()*30).toFixed(3)}} m/s<sup>2</sup></div>
         </mat-card></mat-grid-tile>
         <mat-grid-tile class="valoresDeEntrada" [colspan]="tiles[3].cols"[rowspan]="tiles[3].rows"><mat-card>
                 <mat-toolbar color="accent" id="toolbar">

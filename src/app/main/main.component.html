@@ -20,7 +20,7 @@
     <mat-card>
       <div>
         <label>Intensidad del sol:</label>
-        <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="100"
+        <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="7000"
           (input)="cambiarValorLuz($event)"></mat-slider>
         <div> {{intensidadLuminica}} lux/s</div>
       </div>
@@ -28,22 +28,22 @@
         <label>Intensidad del viento: </label>
         <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="100"
           (input)="cambiarValorViento($event)"></mat-slider>
-        <div> {{intensidadDelViento}} m/s</div>
+        <div> {{intensidadDelViento}} km/h</div>
       </div>
       <div><label>Direccion del viento: </label>
 
-        <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="100"
+        <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="360"
           (input)="cambiarValorDirViento($event)"></mat-slider>
-        <div> {{direccionDelViento}} rad</div>
+        <div> {{direccionDelViento}} º</div>
       </div>
       <mat-divider></mat-divider>
       <div id="barco">
         <label>Angulo de giro: </label>
         <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="-45" max="45" value="0"
           (input)="cambiarValorGiro($event)"></mat-slider>
-        <div> {{giro}} rad</div>
+        <div> {{giro}} º</div>
         <label>Velocidad inicial: </label>
-        <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="100" value="0"
+        <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="99" value="0"
           (input)="cambiarValorVelocidad($event)"></mat-slider>
         <div> {{velocidadInicial}} m/s</div>
       </div>
