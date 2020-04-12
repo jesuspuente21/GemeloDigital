@@ -43,7 +43,7 @@
           (input)="cambiarValorGiro($event)"></mat-slider>
         <div> {{giro}} º</div>
         <label>Velocidad inicial: </label>
-        <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="99" value="0"
+        <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="15" value="0"
           (input)="cambiarValorVelocidad($event)"></mat-slider>
         <div> {{velocidadInicial}} m/s</div>
       </div>
@@ -52,7 +52,7 @@
         <mat-expansion-panel hideToggle disabled [expanded]="!panel.disabled" #panel>
           <mat-expansion-panel-header>
             <mat-panel-title>
-              <mat-slide-toggle class="example-margin" (change)="panel.disabled = panel.disabled? false: true; ">Limitar
+              <mat-slide-toggle class="example-margin" (change)="panel.disabled = panel.disabled? false: true;limitacion= 2; ">Limitar
                 variable</mat-slide-toggle>
             </mat-panel-title>
           </mat-expansion-panel-header>
@@ -60,14 +60,14 @@
             <mat-radio-button value="0">
               <div class="tiempoydistancia">
                 <label>Tiempo: </label>
-                <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="100"
+                <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="3600"
                   (input)="cambiarValorTiempo($event)" [disabled]="limitacion == 1 ? true: false"></mat-slider>
                 <div> {{tiempo}} s</div>
               </div>
             </mat-radio-button>
             <mat-radio-button value="1">
               <div class="tiempoydistancia"><label>Distancia: </label>
-                <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="100"
+                <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="5000"
                   (input)="cambiarValorDistancia($event)" [disabled]="limitacion == 1 ? false: true"></mat-slider>
                 <div> {{distancia}} m</div>
               </div>
@@ -75,7 +75,7 @@
           </mat-radio-group>
         </mat-expansion-panel>
         <br>
-        <button mat-raised-button color="accent" [routerLink]="['/simulacion', {giro: giro,vel: velocidadInicial, sol: intensidadLuminica, v: intensidadDelViento, dirv: direccionDelViento, lim: limitacion, t: tiempo, d: distancia}]">Ver Simulacion</button>
+        <button mat-raised-button color="accent" [routerLink]="['/simulacion', {giro: giro,vel: velocidadInicial, sol: intensidadLuminica, v: intensidadDelViento, dirv: direccionDelViento, lim: limitacion, t: tiempo, d: distancia, vi: velocidadInicial}]">Ver Simulacion</button>
       </div>
     </mat-card>
   </div>

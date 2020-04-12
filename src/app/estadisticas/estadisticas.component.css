@@ -46,4 +46,40 @@ mat-toolbar{
 #tabs {
     padding: 1em;
     background-color: #FFE082;
+    width: 70%;
+    display: inline;
+    float: left;
+
+
+}
+
+#controles {
+    padding: 1em;
+    width: 20%;
+    float: left;
+    display: inline;
+    margin: 1em;
+}
+
+
+#contenido {
+    width: 100%;
+}
+
+label{
+    display: block
+}
+mat-slider {
+    height: 40vh;
+    width: 25%;
+
+}
+
+#controlesdiv {
+    height: 60vh;
+}
+
+#controlesdiv div{
+    display: inline-block;
+    width: 50%;
 }

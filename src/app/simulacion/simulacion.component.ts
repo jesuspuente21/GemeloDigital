@@ -48,6 +48,7 @@ export class SimulacionComponent implements OnInit {
       this.tiempo = params.t;
       this.distancia = params.d;
       this.tiempoEsCero = params.lim
+      this.velocidadInicial = params.vi
       this.plano = this.mapa;
     });
   }

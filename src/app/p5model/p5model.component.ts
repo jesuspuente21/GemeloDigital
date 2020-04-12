@@ -15,25 +15,29 @@ export class P5modelComponent implements AfterViewInit {
   modelAcceleration: any;
   modelTravel: any = 0;
   modelDistance: any = 0;
-  secondsElapsed: number = 12;
+  secondsElapsed: number = 0;
   resetSimulation: () => void;
   playPauseSimulation: () => void;
   simulationPaused: () => boolean;
+  removeSimulation:() => void; 
   @Input() giro
   @Input() sol
   @Input() viento
   @Input() direccionViento
   @Input() tiempo
   @Input() distancia
+  @Input() vi
+  @Input() limite
+
 
   constructor() {
   }
 
   ngAfterViewInit(): void {
-    this.startSketch(this.giro, this.sol, this.viento, this.direccionViento, this.tiempo, this.distancia);
+    this.startSketch(this.giro, this.sol, this.viento, this.direccionViento, this.tiempo, this.distancia, this.vi);
   }
 
-  startSketch(angleRateOfChange, sunlight, windMagnitude, windDir, time, distance) {
+  startSketch(angleRateOfChange, sunlight, windMagnitude, windDir, time, distance, vi) {
 
     const sketch = s => {
 
@@ -41,7 +45,6 @@ export class P5modelComponent implements AfterViewInit {
       var sw = 0.3;
       var sc = '#9FA8DA';
       var paused: boolean = false;
-      var interval
       var secondsElapsed: number = 0;
       var fr = 60
 
@@ -55,14 +58,14 @@ export class P5modelComponent implements AfterViewInit {
       //Environment variables
       var fluidDragConstant = 0.05
       var modelMass = 4
-      var modelInitialVelocity = new PVector(0, 0);
+      var modelInitialVelocity = new PVector(0, s.map(vi, 0, 15, 0, -0.5));
       var modelTurnAngle = s.map(angleRateOfChange, -45, 45, -0.005, 0.005)//0
       var modelThrustPower = s.map(sunlight, 0, 7000, 0, 0.004)//0.23
       var modelSize = 1000
       var modelColor = {r:123, g:217, b: 176}
       var canvasColor = '#1A237E'
       var lineColor = '#FFE082';
-      windMagnitude = s.map(windMagnitude, 0, 100, 0, 0.0002)
+      windMagnitude = s.map(windMagnitude, 0, 100, 0, 0.0005)
       var windVector = {x:windMagnitude* s.sin(s.map(windDir, 0, 360, 0, 2 * Math.PI)), y:windMagnitude* s.cos(s.map(windDir, 0, 360, 0, 2 * Math.PI))}
 
       var Drag = function (c) {
@@ -216,8 +219,8 @@ export class P5modelComponent implements AfterViewInit {
         return paused
       }
 
-      var counter = function(): void {
-        secondsElapsed++;
+      var remove = function(): void {
+        s.remove();
       }
 
       s.setup = () => {
@@ -226,6 +229,7 @@ export class P5modelComponent implements AfterViewInit {
         s.rect(0, 0, s.width, s.height);
         s.frameRate(fr);
         this.resetSimulation = reset;
+        this.removeSimulation = remove;
         this.playPauseSimulation = playPause;
         this.simulationPaused = isPaused;
        
@@ -237,7 +241,10 @@ export class P5modelComponent implements AfterViewInit {
 
       s.draw = () => {
         s.background(canvasColor);
-
+        if((time <= secondsElapsed && this.limite == 0) || (distance <= this.modelTravel && this.limite == 1)) {
+          paused = true;
+          this.limite = 2;
+        } 
         if(!isPaused()){
 
         var dragForce = drag.calculateDrag(mover);

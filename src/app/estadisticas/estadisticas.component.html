@@ -37,10 +37,38 @@
             </button>
         </div>
     </mat-card>
+    <div id="contenido">
+            <mat-card id="controles"> 
+                    <div id="controlesdiv">
+                            <div >
+                                    <label>Luz Solar</label>
+                                    <br>
+                                    <mat-divider></mat-divider>
+                                    <br>
+                                    <mat-slider thumbLabel [displayWith]="formatLabel" [disabled]="selected ==21 ||selected ==33 ||selected ==35 ||selected ==55 || selected== 77" [vertical]="true" tickInterval="1" min="0" max="7000"
+                                    (input)="cambiarValorLuz($event)"></mat-slider>
+                                      <br><br>
+                                    <div> {{luz}} lux</div>
+                                  </div>
+                                  <div>
+                                    <label>Viento</label>
+                                    <br>
+                                    <mat-divider></mat-divider>
+                                    <br>
+                                    <mat-slider thumbLabel [displayWith]="formatLabel" [disabled]="selected ==51 ||selected ==85 ||selected ==77" [vertical]="true" tickInterval="1" min="0" max="100"
+                                    (input)="cambiarValorViento($event)"></mat-slider>
+                                      <br><br>
+                                    <div> {{viento}} km/h</div>
+                                  </div>
+                           
+                        </div>
+                </mat-card>
     <mat-card id="tabs">
+        
                 <div style="height: 60vh">
                 <app-grafica #graph chart="selected"></app-grafica>
                
             </div>
     </mat-card>
+</div>
 </div>

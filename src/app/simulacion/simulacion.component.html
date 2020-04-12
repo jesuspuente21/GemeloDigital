@@ -2,7 +2,7 @@
         <mat-grid-tile [colspan]="tiles[0].cols"[rowspan]="tiles[0].rows">
                 <img src="assets/logo.png">
         </mat-grid-tile>
-        <mat-grid-tile [colspan]="tiles[1].cols"[rowspan]="tiles[1].rows"><mat-card id="modelo"><app-p5model #plano giro={{anguloDeGiro}} sol={{intensidadLuminica}} viento={{intensidadDelViento}} direccionViento={{direccionDelViento}} tiempo={{tiempo}} distancia={{distancia}}></app-p5model></mat-card></mat-grid-tile>
+        <mat-grid-tile [colspan]="tiles[1].cols"[rowspan]="tiles[1].rows"><mat-card id="modelo"><app-p5model #plano giro={{anguloDeGiro}} sol={{intensidadLuminica}} viento={{intensidadDelViento}} direccionViento={{direccionDelViento}} tiempo={{tiempo}} distancia={{distancia}} vi={{velocidadInicial}} limite={{tiempoEsCero}}></app-p5model></mat-card></mat-grid-tile>
         <mat-grid-tile class="valoresSimulados" [colspan]="tiles[2].cols"[rowspan]="tiles[2].rows"><mat-card>
                 <mat-toolbar color="accent" id="toolbar">
                         <h2>{{tiles[2].text}}</h2> 
@@ -15,8 +15,8 @@
                         <h2>{{tiles[3].text}}</h2>
                     </mat-toolbar>
                     <label>Intensidad del sol:</label> <span class="spacer"></span><div>{{intensidadLuminica}} lux</div><mat-divider></mat-divider>
-                    <label>Intensidad del viento:</label> <span class="spacer"></span> <div>{{intensidadDelViento}} m/s</div><mat-divider></mat-divider>
-                    <label>Direccion del viento:</label> <span class="spacer"></span><div>{{direccionDelViento}} rad</div><mat-divider></mat-divider>
+                    <label>Intensidad del viento:</label> <span class="spacer"></span> <div>{{intensidadDelViento}} km/h</div><mat-divider></mat-divider>
+                    <label>Direccion del viento:</label> <span class="spacer"></span><div>{{direccionDelViento}} º</div><mat-divider></mat-divider>
                     <label>Angulo de giro:</label> <span class="spacer"></span><div>{{anguloDeGiro}} rad</div><mat-divider></mat-divider>
                     <label>Velociadad inicial:</label> <span class="spacer"></span><div>{{velocidadInicial}} m/s</div>
         </mat-card></mat-grid-tile>
@@ -39,7 +39,7 @@
         <button mat-raised-button (click)="this.plano.resetSimulation();this.plano.modelTravel = 0;">
             <mat-icon>replay</mat-icon>
             Reiniciar
-        </button><button mat-raised-button routerLink="/main">
+        </button><button mat-raised-button (click)="this.plano.removeSimulation()" routerLink="/main">
             <mat-icon>keyboard_backspace</mat-icon>
             Volver
         </button>
