@@ -1,36 +1,28 @@
 <div class="menu">
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-        <mat-icon color="accent">menu_alt</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item routerLink="/estadisticas">
+
+        <button mat-button id="statistics" routerLink="/estadisticas">
           <mat-icon>event_note</mat-icon>
-          <span>Estadisticas</span>
+          <span>Estadísticas</span>
         </button>
-        <button mat-menu-item routerLink="/simulacion">
-          <mat-icon>ondemand_video</mat-icon>
-          <span>Simulación libre</span>
-        </button>
-      </mat-menu>
 </div>
 <div class="container" [class.is-mobile]="mobileQuery.matches">
   <div class="mat-typography">
     <img src="assets/logo.png">
-    <h2>Gemelo digital de embarcaciones</h2>
+    <h2>Gemelo Digital De Embarcaciones</h2>
     <mat-card>
       <div>
         <label>Intensidad del sol:</label>
-        <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="7000"
+        <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="55000"
           (input)="cambiarValorLuz($event)"></mat-slider>
-        <div> {{intensidadLuminica}} lux/s</div>
+        <div> {{intensidadLuminica}} lux</div>
       </div>
       <div>
         <label>Intensidad del viento: </label>
-        <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="100"
+        <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="16"
           (input)="cambiarValorViento($event)"></mat-slider>
         <div> {{intensidadDelViento}} km/h</div>
       </div>
-      <div><label>Direccion del viento: </label>
+      <div><label>Dirección del viento: </label>
 
         <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="360"
           (input)="cambiarValorDirViento($event)"></mat-slider>
@@ -38,12 +30,12 @@
       </div>
       <mat-divider></mat-divider>
       <div id="barco">
-        <label>Angulo de giro: </label>
+        <label>Ángulo de giro: </label>
         <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="-45" max="45" value="0"
           (input)="cambiarValorGiro($event)"></mat-slider>
         <div> {{giro}} º</div>
         <label>Velocidad inicial: </label>
-        <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="15" value="0"
+        <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="0.1" min="0" max="2" value="0" step="0.1"
           (input)="cambiarValorVelocidad($event)"></mat-slider>
         <div> {{velocidadInicial}} m/s</div>
       </div>
@@ -67,7 +59,7 @@
             </mat-radio-button>
             <mat-radio-button value="1">
               <div class="tiempoydistancia"><label>Distancia: </label>
-                <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="5000"
+                <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="500"
                   (input)="cambiarValorDistancia($event)" [disabled]="limitacion == 1 ? false: true"></mat-slider>
                 <div> {{distancia}} m</div>
               </div>
@@ -75,7 +67,7 @@
           </mat-radio-group>
         </mat-expansion-panel>
         <br>
-        <button mat-raised-button color="accent" [routerLink]="['/simulacion', {giro: giro,vel: velocidadInicial, sol: intensidadLuminica, v: intensidadDelViento, dirv: direccionDelViento, lim: limitacion, t: tiempo, d: distancia, vi: velocidadInicial}]">Ver Simulacion</button>
+        <button mat-raised-button color="accent" [routerLink]="['/simulacion', {giro: giro,vel: velocidadInicial, sol: intensidadLuminica, v: intensidadDelViento, dirv: direccionDelViento, lim: limitacion, t: tiempo, d: distancia, vi: velocidadInicial}]">Ver Simulación</button>
       </div>
     </mat-card>
   </div>

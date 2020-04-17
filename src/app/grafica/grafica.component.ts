@@ -13,7 +13,7 @@ export class GraficaComponent implements AfterViewInit {
   constanteResistencia = 0.05;
   constanteViento = 0;
   constanteLuz = 0;
-  constantePotenciaLuz = 0.0015;
+  constantePotenciaLuz = 0.0018;
 
   constructor() { }
 
@@ -45,13 +45,13 @@ export class GraficaComponent implements AfterViewInit {
   }
     switch(option){
       case 21://velocidad-potencia
-      for (var i = 0; i < 12; i+=0.1) {
+      for (var i = 0; i < 100; i+=1) {
         y = this.velocidadPotencia(i, 0)
         dataPoints.push({x: i,  y: y });
       }
       break
       case 33://velocidad-sol
-      for (var i = 0; i < 7000; i++) {
+      for (var i = 0; i < 55000; i++) {
         y = this.velocidadIntensidadSolar(i)
         dataPoints.push({x: i,  y: y });
       }
@@ -63,20 +63,20 @@ export class GraficaComponent implements AfterViewInit {
       }
       break
       case 51: //velocidad - viento
-      for (var i = 0; i < 100; i++) {
+      for (var i = 0; i < 16; i++) {
         this.constanteViento = 0;
         y = this.velocidadIntensidadViento(i)
         dataPoints.push({x: i,  y: y });
       }
       break
       case 35: //tiempo - potencia
-      for (var i = 0; i < 12; i+=0.1) {
+      for (var i = 0; i < 100; i+=0.1) {
         y = this.tiempoPotencia(i)
         dataPoints.push({x: i,  y: y });
       }
       break
       case 55: //tiempo - sol
-      for (var i = 0; i < 7000; i++) {
+      for (var i = 0; i < 55000; i++) {
         y = this.tiempoIntensidadSolar(i)
         dataPoints.push({x: i,  y: y });
       }
@@ -89,13 +89,13 @@ export class GraficaComponent implements AfterViewInit {
       break
       case 85: //tiempo- viento
       this.constanteViento = 0;
-      for (var i = 0; i < 100; i++) {
+      for (var i = 0; i < 16; i++) {
         y = this.tiempoIntensidadViento(i)
         dataPoints.push({x: i,  y: y });
       }
       break
       case 77: // potencia - sol
-      for (var i = 0; i < 7000; i++) {
+      for (var i = 0; i < 55000; i++) {
         y = this.potenciaIntensidadSolar(i)
         dataPoints.push({x: i,  y: y });
       }
@@ -112,7 +112,7 @@ export class GraficaComponent implements AfterViewInit {
 
   //Velocidad terminal
   velocidadPotencia = function (potencia, viento) {
-    return Math.sqrt(Math.abs((potencia/12*0.004) - this.constanteViento/100*0.0005 - viento/100*0.0005) / this.constanteResistencia) * 60
+    return Math.sqrt(Math.abs((potencia/100*0.004) - this.constanteViento/16*0.0005 - viento/16*0.0005) / this.constanteResistencia) * 60 / 8
   }
 
   velocidadIntensidadSolar = function (intensidadSolar) {
@@ -129,17 +129,17 @@ export class GraficaComponent implements AfterViewInit {
   }
   //Tiempo en alcanzar velocidad terminal
   tiempoPotencia = function (potencia) {
-    return 3 * this.velocidadPotencia(potencia, 0) / (Math.abs(potencia/12*0.004 - this.constanteViento/100*0.0005)*60/this.constanteResistencia)
+    return 3 * this.velocidadPotencia(potencia, 0) / (Math.abs(potencia/100*0.004 - this.constanteViento/16*0.0005)*60/8/this.constanteResistencia)
   }
 
   tiempoIntensidadSolar = function (intensidadSolar) {
     var potencia = this.potenciaIntensidadSolar(intensidadSolar)
-    return 3 * this.velocidadPotencia(potencia, 0) / (Math.abs(potencia/12*0.004 - this.constanteViento/100*0.0005)*60/this.constanteResistencia)
+    return 3 * this.velocidadPotencia(potencia, 0) / (Math.abs(potencia/100*0.004 - this.constanteViento/16*0.0005)*60/8/this.constanteResistencia)
   }
 
   tiempoIntensidadViento = function (viento) {
     var potencia = this.potenciaIntensidadSolar(this.constanteLuz)
-    return 3 * this.velocidadPotencia(potencia, viento) / (Math.abs(potencia/12*0.004 - viento/100*0.0005)*60/this.constanteResistencia)
+    return 3 * this.velocidadPotencia(potencia, viento) / (Math.abs(potencia/100*0.004 - viento/16*0.0005)*60/8/this.constanteResistencia)
   }
 
   tiempoDireccionViento = function (direccionViento) {

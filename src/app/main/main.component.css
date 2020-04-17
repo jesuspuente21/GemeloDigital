@@ -78,3 +78,7 @@ button{
     right: 7em;
     top: 2em;
 }
+
+#statistics {
+    color: rgb(255, 220, 115);
+}

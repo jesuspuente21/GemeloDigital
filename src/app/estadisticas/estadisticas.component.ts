@@ -28,7 +28,7 @@ export class EstadisticasComponent implements AfterViewInit {
   variablesx: Variable[] = [
     { displayName: 'Potencia ofrecida por el panel solar (W)', name: 7 },
     { displayName: 'Intensidad Solar (lux)', name: 11 },
-    { displayName: 'Direccion del Viento (rad)', name: 13 },
+    { displayName: 'Dirección del Viento (rad)', name: 13 },
     { displayName: 'Intensidad del Viento (m/s)', name: 17 }]
   cx: number = 0;
   cy: number = 0;

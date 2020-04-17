@@ -58,14 +58,14 @@ export class P5modelComponent implements AfterViewInit {
       //Environment variables
       var fluidDragConstant = 0.05
       var modelMass = 4
-      var modelInitialVelocity = new PVector(0, s.map(vi, 0, 15, 0, -0.5));
+      var modelInitialVelocity = new PVector(0, s.map(vi, 0, 2, 0, -0.5));
       var modelTurnAngle = s.map(angleRateOfChange, -45, 45, -0.005, 0.005)//0
-      var modelThrustPower = s.map(sunlight, 0, 7000, 0, 0.004)//0.23
+      var modelThrustPower = s.map(sunlight, 0, 55000, 0, 0.004)//0.23
       var modelSize = 1000
       var modelColor = {r:123, g:217, b: 176}
       var canvasColor = '#1A237E'
       var lineColor = '#FFE082';
-      windMagnitude = s.map(windMagnitude, 0, 100, 0, 0.0005)
+      windMagnitude = s.map(windMagnitude, 0, 16, 0, 0.0005)
       var windVector = {x:windMagnitude* s.sin(s.map(windDir, 0, 360, 0, 2 * Math.PI)), y:windMagnitude* s.cos(s.map(windDir, 0, 360, 0, 2 * Math.PI))}
 
       var Drag = function (c) {
@@ -258,8 +258,8 @@ export class P5modelComponent implements AfterViewInit {
         var previousPosition = mover.position.clone()
         this.secondsElapsed = secondsElapsed;
         mover.update();
-        this.modelTravel += PVector.sub(previousPosition,mover.position).mag()/2;
-        this.modelDistance = PVector.sub(mover.position,PVector( s.width / 2, s.height - s.height / 8)).mag()/2;
+        this.modelTravel += PVector.sub(previousPosition,mover.position).mag()/16;
+        this.modelDistance = PVector.sub(mover.position,PVector( s.width / 2, s.height - s.height / 8)).mag()/16;
         if(s.frameCount%fr== 0) secondsElapsed++;
       }
         grid.display(mover.velocity.x < 0, mover.velocity.y < 0)
