@@ -27,8 +27,8 @@
                         <h2 *ngIf="this.tiempoEsCero == 1" style="margin: 2em"> Distancia = {{distancia}}m</h2>    
                     </mat-toolbar>
                     <label>Tiempo Empleado:</label> <span class="spacer"></span><div>{{this.plano.secondsElapsed}} s</div><mat-divider></mat-divider>
-                    <label style="color: #FBC02D">Distancia recorrida:</label> <span class="spacer"></span><div>{{this.plano.modelTravel.toFixed(1)}} m</div><mat-divider></mat-divider>
-                    <label style="color: #0D47A1">Distancia en linea recta: </label> <span class="spacer"></span><div>{{this.plano.modelDistance.toFixed(1)}} m</div>
+                    <label style="color: #FBC02D">Distancia Recorrida:</label> <span class="spacer"></span><div>{{this.plano.modelTravel.toFixed(1)}} m</div><mat-divider></mat-divider>
+                    <label style="color: #0D47A1">Distancia en Línea Recta: </label> <span class="spacer"></span><div>{{this.plano.modelDistance.toFixed(1)}} m</div>
         </mat-card></mat-grid-tile>
         <mat-grid-tile class="botones" [colspan]="tiles[5].cols"[rowspan]="tiles[5].rows">
             <div class="botones" *ngIf="this.plano.simulationPaused !== undefined!">

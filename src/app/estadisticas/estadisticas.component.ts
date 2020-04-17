@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { GraficaComponent } from "../grafica/grafica.component"
-import { ViewEncapsulation } from '@angular/compiler/src/compiler_facade_interface';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 
 
 export interface Variable {
@@ -37,7 +38,7 @@ export class EstadisticasComponent implements AfterViewInit {
   viento = 0;
   luz = 0;
 
-  constructor() {
+  constructor(private _snackBar: MatSnackBar) {
 
   }
 
@@ -54,6 +55,10 @@ export class EstadisticasComponent implements AfterViewInit {
     this.selected = cx * cy
     this.graph.startCanvas(this.selected)
     console.log(this.selected)
+    if(this.selected ==49 || this.selected == 91 || this.selected == 119)
+    this._snackBar.open("Gráfica No Disponible", "", {
+      duration: 3000,
+    });
   }
 
   cambiarValorViento(event) {

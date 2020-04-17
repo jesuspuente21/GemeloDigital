@@ -18,6 +18,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 
@@ -38,6 +39,7 @@ import {MatSelectModule} from '@angular/material/select';
       MatButtonToggleModule,
       MatDividerModule,
       MatGridListModule,
+
    ],
    exports: [
         CommonModule,
@@ -58,6 +60,7 @@ import {MatSelectModule} from '@angular/material/select';
         MatTabsModule,
         MatFormFieldModule,
         MatSelectModule,
+        MatSnackBarModule,
    ],
    providers: [
    ]
