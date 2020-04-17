@@ -24,7 +24,7 @@ export class SimulacionComponent implements OnInit {
     {text: 'Simulacion', cols: 3, rows: 5},
     {text: 'Valores Simulados', cols: 2, rows: 2},
     {text: 'Variables de Entrada', cols: 2, rows: 3},
-    {text: 'Factor limitante: ', cols: 2, rows: 2},
+    {text: 'Factor Limitante: ', cols: 2, rows: 2},
     {text: 'Controles', cols: 1, rows: 2},
   ];
 

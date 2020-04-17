@@ -16,9 +16,9 @@
                     </mat-toolbar>
                     <label>Intensidad del sol:</label> <span class="spacer"></span><div>{{intensidadLuminica}} lux</div><mat-divider></mat-divider>
                     <label>Intensidad del viento:</label> <span class="spacer"></span> <div>{{intensidadDelViento}} km/h</div><mat-divider></mat-divider>
-                    <label>Direccion del viento:</label> <span class="spacer"></span><div>{{direccionDelViento}} º</div><mat-divider></mat-divider>
-                    <label>Angulo de giro:</label> <span class="spacer"></span><div>{{anguloDeGiro}} rad</div><mat-divider></mat-divider>
-                    <label>Velociadad inicial:</label> <span class="spacer"></span><div>{{velocidadInicial}} m/s</div>
+                    <label>Dirección del viento:</label> <span class="spacer"></span><div>{{direccionDelViento}} º</div><mat-divider></mat-divider>
+                    <label>Ángulo de giro:</label> <span class="spacer"></span><div>{{anguloDeGiro}} rad</div><mat-divider></mat-divider>
+                    <label>Velocidad inicial:</label> <span class="spacer"></span><div>{{velocidadInicial}} m/s</div>
         </mat-card></mat-grid-tile>
         <mat-grid-tile class="factorLimitante" [colspan]="tiles[4].cols"[rowspan]="tiles[4].rows"><mat-card>
                 <mat-toolbar color="accent" id="toolbar">
@@ -28,7 +28,7 @@
                     </mat-toolbar>
                     <label>Tiempo Empleado:</label> <span class="spacer"></span><div>{{this.plano.secondsElapsed}} s</div><mat-divider></mat-divider>
                     <label style="color: #FBC02D">Distancia recorrida:</label> <span class="spacer"></span><div>{{this.plano.modelTravel.toFixed(1)}} m</div><mat-divider></mat-divider>
-                    <label style="color: #0D47A1">Distancia: </label> <span class="spacer"></span><div>{{this.plano.modelDistance.toFixed(1)}} m</div>
+                    <label style="color: #0D47A1">Distancia en linea recta: </label> <span class="spacer"></span><div>{{this.plano.modelDistance.toFixed(1)}} m</div>
         </mat-card></mat-grid-tile>
         <mat-grid-tile class="botones" [colspan]="tiles[5].cols"[rowspan]="tiles[5].rows">
             <div class="botones" *ngIf="this.plano.simulationPaused !== undefined!">

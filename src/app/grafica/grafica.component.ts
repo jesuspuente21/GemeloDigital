@@ -63,7 +63,7 @@ export class GraficaComponent implements AfterViewInit {
       }
       break
       case 51: //velocidad - viento
-      for (var i = 0; i < 16; i++) {
+      for (var i = 0; i < 16; i+=0.1) {
         this.constanteViento = 0;
         y = this.velocidadIntensidadViento(i)
         dataPoints.push({x: i,  y: y });
@@ -89,7 +89,7 @@ export class GraficaComponent implements AfterViewInit {
       break
       case 85: //tiempo- viento
       this.constanteViento = 0;
-      for (var i = 0; i < 16; i++) {
+      for (var i = 0; i < 16; i+=0.1) {
         y = this.tiempoIntensidadViento(i)
         dataPoints.push({x: i,  y: y });
       }
