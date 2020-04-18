@@ -1,0 +1,84 @@
+  
+.container {
+display: flex;
+flex-direction: column;
+position: absolute;
+top: 0;
+bottom: 0;
+left: 0;
+right: 0;
+max-width: 50em;
+margin: auto;
+align-items: center;
+text-align: center;
+/*border: 3px solid green;*/
+
+}
+.mat-typography {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+mat-card {
+    text-align: left;
+    background-color: white;
+}
+
+mat-card div {
+    display: inline;
+}
+
+.tiempoydistancia label{
+    width: 10em;
+}
+mat-expansion-panel{
+    background-color: #C5CAE9;
+}
+
+mat-slider {
+    width: 300px;
+
+}
+
+#barco label {
+    width: 20%;
+}
+#barco mat-slider {
+    width: 150px;
+}
+
+label {
+    display: inline-block;
+    width: 35%;
+    text-align: right;
+}​
+
+.mat-button {
+    font-family: "Poppins", Arial, sans-serif;
+    font-size: large;
+}
+
+img {
+height: 15em;
+vertical-align: middle;
+}
+
+h2 {
+    color: #1A237E;
+}
+button{
+    width: 100%;
+}
+
+.menu {
+    position: absolute;
+    right: 7em;
+    top: 2em;
+}
+
+#statistics {
+    color: rgb(255, 220, 115);
+}

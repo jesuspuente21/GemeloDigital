@@ -1,0 +1,74 @@
+<div class="menu">
+
+        <button mat-button id="statistics" routerLink="/estadisticas">
+          <mat-icon>event_note</mat-icon>
+          <span>Estadísticas</span>
+        </button>
+</div>
+<div class="container" [class.is-mobile]="mobileQuery.matches">
+  <div class="mat-typography">
+    <img src="assets/logo.png">
+    <h2>Gemelo Digital De Embarcaciones</h2>
+    <mat-card>
+      <div>
+        <label>Intensidad del sol:</label>
+        <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="55000"
+          (input)="cambiarValorLuz($event)"></mat-slider>
+        <div> {{intensidadLuminica}} lux</div>
+      </div>
+      <div>
+        <label>Intensidad del viento: </label>
+        <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="16"
+          (input)="cambiarValorViento($event)"></mat-slider>
+        <div> {{intensidadDelViento}} km/h</div>
+      </div>
+      <div><label>Dirección del viento: </label>
+
+        <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="360"
+          (input)="cambiarValorDirViento($event)"></mat-slider>
+        <div> {{direccionDelViento}} º</div>
+      </div>
+      <mat-divider></mat-divider>
+      <div id="barco">
+        <label>Ángulo de giro: </label>
+        <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="-45" max="45" value="0"
+          (input)="cambiarValorGiro($event)"></mat-slider>
+        <div> {{giro}} º</div>
+        <label>Velocidad inicial: </label>
+        <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="0.1" min="0" max="2" value="0" step="0.1"
+          (input)="cambiarValorVelocidad($event)"></mat-slider>
+        <div> {{velocidadInicial}} m/s</div>
+      </div>
+      <mat-divider></mat-divider>
+      <div>
+        <mat-expansion-panel hideToggle disabled [expanded]="!panel.disabled" #panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <mat-slide-toggle class="example-margin" (change)="panel.disabled = panel.disabled? false: true;limitacion= 2; ">Limitar
+                variable</mat-slide-toggle>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-radio-group aria-label="Select an option" [(ngModel)]="limitacion">
+            <mat-radio-button value="0">
+              <div class="tiempoydistancia">
+                <label>Tiempo: </label>
+                <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="3600"
+                  (input)="cambiarValorTiempo($event)" [disabled]="limitacion == 1 ? true: false"></mat-slider>
+                <div> {{tiempo}} s</div>
+              </div>
+            </mat-radio-button>
+            <mat-radio-button value="1">
+              <div class="tiempoydistancia"><label>Distancia: </label>
+                <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="500"
+                  (input)="cambiarValorDistancia($event)" [disabled]="limitacion == 1 ? false: true"></mat-slider>
+                <div> {{distancia}} m</div>
+              </div>
+            </mat-radio-button>
+          </mat-radio-group>
+        </mat-expansion-panel>
+        <br>
+        <button mat-raised-button color="accent" [routerLink]="['/simulacion', {giro: giro,vel: velocidadInicial, sol: intensidadLuminica, v: intensidadDelViento, dirv: direccionDelViento, lim: limitacion, t: tiempo, d: distancia, vi: velocidadInicial}]">Ver Simulación</button>
+      </div>
+    </mat-card>
+  </div>
+</div>

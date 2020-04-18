@@ -1,34 +1,46 @@
-# GemeloDigital
+# Twinbo Gemelo Digital
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.4.
+Twinbo es el frontend utlizado para el desarrollo de un gemelo digital de una embarción propulsada por energia solar. Se trata de una aplicación nativa para las plataformas basadas en Unix y para Windows. Se ha desarrollado utilizando el framework para aplicaciones web *Angular* y el framework *Electron* para el desarrollo de aplicaciones gráficas de escritorio empleando componentes originalmente desarrollados para aplicaciones web.
 
-## Requierements
+Consta de tres pantanllas principales:
+
+* **Portada**. Muestra el logo y el acceso a las otras 2 pantallas.
+* **Simulación**. Muestra el desplazamiento del barco solar en el agua dados unos parametros ambientales fijos.
+* **Estadísticas**. Mediante una serie de gráficas bidimensionales muestra la correlacion entre distintas variables de entrada y de salida.
+
+Tanto las gráficas como la simulación han sido desarrolladas basandose en un modelo de fisica basica del movimiento de un objeto en un fluido cuando se le aplicacan distintas fuerzas. La idea para aplicar a un gemelo digital completo sería obtener (mediante ensayos reales) los distintos parámetros de salida que se valorán en la pantalla *Estadísticas* (velocidad terminal, tiempo en alcanzar la velocidas terminal y potencia generada por la placa fotovoltaica) y ajustar el modelo físico comentado anteriormente para que se ajuste con la realidad del barco.
+
+Por la falta de pruebas reales es posible que ciertos fenómenos físicos no sean contemplados por el modelo virtual.
+
+Este proyecto fue generado utilizando [Angular CLI](https://github.com/angular/angular-cli) version 9.0.4.
+
+## Requisisitos
 
 * Nodejs
 * Angular-cli `npm install -g @angular/cli`
 * Electron `npm install electron --save-dev`
 * Install node dependencies `npm install`
 
-## Development server
+## Servidor para desarrollo
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Ejecuta  `ng serve` para un servidor para desrrollo. Navega hacia `http://localhost:4200/`. La aplicacion se recargará de foram automática si se cambia cualquiera de sus ficheros fuente.
 
-## Build
+## Construir
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Ejecuta `ng build` para construir el proyecto. Los elementos generados seran guardados en el directorio `dist/`. Usa la bandera  `--prod` para la construcción para produccion.
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Ejecuta `ng test` pora correr test unitarios via [Karma](https://karma-runner.github.io).
 
 ## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Ejecuta `ng e2e` para currer test fin a fin via [Protractor](http://www.protractortest.org/).
 
-## Build and run electron app
+## Construir y ejecutar aplicacion nativa
 
-Run `npm run build-electron` to build the project and open the compiled app.
+Ejecuta `npm run build-electron` para construir el proyecto y abrir la aplicación.
 
-## Run electron app
+## Ejecutar aplicacion nativa
 
-Run `npm run electron` to run the already compiled project.
+Ejecuta `npm run electron` para ejecutar la aplicación ya compilada.

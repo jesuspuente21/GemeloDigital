@@ -1,15 +1,15 @@
 const { app, BrowserWindow } = require('electron')
-require('electron-debug')({showDevTools: true})
+require('electron-debug')({showDevTools: false})
 
 let win;
 
 function createWindow () {
   // Create the browser window.
   win = new BrowserWindow({
-    width: 600, 
-    height: 600,
+    width: 1280, 
+    height: 800,
     backgroundColor: '#ffffff',
-    icon: `file://${__dirname}/dist/assets/logo.png`
+    icon: `file://${__dirname}/dist/assets/logo.PNG`
   })
 
 
