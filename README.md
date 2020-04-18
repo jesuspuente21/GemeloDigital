@@ -1,5 +1,7 @@
 # Twinbo Gemelo Digital
 
+## Descripción del proyecto
+
 Twinbo es el frontend utlizado para el desarrollo de un gemelo digital de una embarción propulsada por energia solar. Se trata de una aplicación nativa para las plataformas basadas en Unix y para Windows. Se ha desarrollado utilizando el framework para aplicaciones web *Angular* y el framework *Electron* para el desarrollo de aplicaciones gráficas de escritorio empleando componentes originalmente desarrollados para aplicaciones web.
 
 Consta de tres pantanllas principales:
@@ -29,11 +31,11 @@ Ejecuta  `ng serve` para un servidor para desrrollo. Navega hacia `http://localh
 
 Ejecuta `ng build` para construir el proyecto. Los elementos generados seran guardados en el directorio `dist/`. Usa la bandera  `--prod` para la construcción para produccion.
 
-## Running unit tests
+## Ejecutar test unitarios
 
 Ejecuta `ng test` pora correr test unitarios via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## Ejecutar test fin a fin
 
 Ejecuta `ng e2e` para currer test fin a fin via [Protractor](http://www.protractortest.org/).
 
